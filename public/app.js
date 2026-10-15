@@ -1,7 +1,9 @@
 const { useState, useEffect } = React;
 
 // ─── API LAYER ───────────────────────────────────────────────
-const API = 'http://localhost:4000/api';
+const API = (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'))
+  ? 'http://localhost:4000/api'
+  : 'https://fieldmapper-api.onrender.com/api';
 let _token = localStorage.getItem('fm_token') || null;
 const api = {
   setToken: (t) => { _token = t; t ? localStorage.setItem('fm_token', t) : localStorage.removeItem('fm_token'); },
